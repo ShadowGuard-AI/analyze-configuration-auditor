@@ -54,24 +54,28 @@ def load_config(config_file):
 
 
 def load_system_config(system_config_file):
-     """
-     Loads the system configuration from a file.  This is a placeholder.
-     More complex parsing logic would be needed based on the file type.
-     Args:
-         system_config_file (str): Path to the system config file.
-     Returns:
-         dict:  A dictionary representation of the system configuration.
-     Raises:
+    """
+    Loads the system configuration from a file as a list of raw lines.
+
+    The audit below is a plain text search, so no per-format parser is
+    attempted: sshd_config, Apache and most daemon configs are line based,
+    and parsing each dialect would add failure modes without changing
+    what the check can see.
+    Args:
+        system_config_file (str): Path to the system config file.
+    Returns:
+        list: The lines of the file.
+    Raises:
         FileNotFoundError: If the system config file does not exist.
         Exception: If the system config file cannot be loaded.
-     """
-     if not os.path.exists(system_config_file):
+    """
+    if not os.path.exists(system_config_file):
         raise FileNotFoundError(f"System configuration file not found: {system_config_file}")
-     try:
-          with open(system_config_file, 'r') as f:
-               config_data = f.readlines()  #Read by line for now.
-          return config_data  # return list of lines
-     except Exception as e:
+    try:
+        with open(system_config_file, 'r') as f:
+            config_data = f.readlines()
+        return config_data
+    except Exception as e:
         raise Exception(f"Error loading system configuration file: {e}")
 
 def audit_configuration(config, system_config_data):
@@ -85,6 +89,9 @@ def audit_configuration(config, system_config_data):
     Returns:
         pandas.DataFrame: A DataFrame containing the audit results.
     """
+    if not isinstance(config, dict) or not isinstance(config.get('rules'), list):
+        raise ValueError("Rules file must contain a top level 'rules' list.")
+
     results = []
     for rule in config['rules']:
         rule_id = rule['id']
@@ -94,6 +101,11 @@ def audit_configuration(config, system_config_data):
 
         found = False
         for line in system_config_data:
+            # A commented out line is not a setting. Without this skip,
+            # "#PermitRootLogin no" in a file that never sets the option
+            # would report PASS for a control that is not in force.
+            if line.lstrip().startswith('#'):
+                continue
             if check in line:
                 found = True
                 break
@@ -143,26 +155,4 @@ def main():
         sys.exit(1)
 
 if __name__ == "__main__":
-    # Example Usage:
-    # Create example config file (config.yaml):
-    # rules:
-    #   - id: SSH-001
-    #     description: "Check if PermitRootLogin is disabled"
-    #     check: "PermitRootLogin no"
-    #     severity: "High"
-    #   - id: SSH-002
-    #     description: "Check if PasswordAuthentication is disabled"
-    #     check: "PasswordAuthentication no"
-    #     severity: "High"
-    #
-    # Create example sshd_config file (sshd_config):
-    # PermitRootLogin no
-    # PasswordAuthentication no
-    # Port 22
-    #
-    # Run the script:
-    # python main.py config.yaml sshd_config -o audit_report.csv
-    # Or
-    # python main.py config.yaml sshd_config
-
     main()
