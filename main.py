@@ -16,8 +16,8 @@ def setup_argparse():
     Returns:
         argparse.ArgumentParser: The argument parser object.
     """
-    parser = argparse.ArgumentParser(description="Audits system configurations against security best practices.")
-    parser.add_argument("config_file", help="Path to the configuration file (YAML or JSON).")
+    parser = argparse.ArgumentParser(description="Audits system configurations against security best practices. A shipped SSH rule set is in sshd_rules.yaml; see README for the rules format.")
+    parser.add_argument("config_file", help="Path to the rules file (YAML or JSON). See sshd_rules.yaml for a shipped example.")
     parser.add_argument("system_config_file", help="Path to the system configuration file to audit (e.g., SSH config).")
     parser.add_argument("-o", "--output", help="Path to the output file (CSV). If not specified, prints to console.", required=False)
     parser.add_argument("-v", "--verbose", action="store_true", help="Enable verbose logging.", required=False)
@@ -91,6 +91,8 @@ def audit_configuration(config, system_config_data):
     """
     if not isinstance(config, dict) or not isinstance(config.get('rules'), list):
         raise ValueError("Rules file must contain a top level 'rules' list.")
+    if not config['rules']:
+        raise ValueError("Rules list is empty: no rules were evaluated, so no audit was performed.")
 
     results = []
     for rule in config['rules']:

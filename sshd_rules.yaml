@@ -1,0 +1,17 @@
+# Shipped best practice rules for an OpenSSH server configuration
+# (sshd_config). See README.md for the rules format.
+# Each check is plain text searched for in non-comment lines of the
+# system configuration file.
+rules:
+  - id: SSH-001
+    description: Root login is disabled
+    check: "PermitRootLogin no"
+    severity: High
+  - id: SSH-002
+    description: Password authentication is disabled
+    check: "PasswordAuthentication no"
+    severity: High
+  - id: SSH-003
+    description: Empty passwords are not permitted
+    check: "PermitEmptyPasswords no"
+    severity: High
