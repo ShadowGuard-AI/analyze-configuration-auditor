@@ -42,6 +42,11 @@ def load_config(config_file):
 
     try:
         with open(config_file, 'r') as f:
+            # The extension alone picks the parser, and the comparison
+            # is case sensitive, so a rules file named RULES.YAML is
+            # rejected as unsupported even though it would parse fine.
+            # Content sniffing would fix that; naming discipline is
+            # what I rely on instead.
             if config_file.endswith('.yaml') or config_file.endswith('.yml'):
                 config = yaml.safe_load(f)
             elif config_file.endswith('.json'):
@@ -96,11 +101,21 @@ def audit_configuration(config, system_config_data):
 
     results = []
     for rule in config['rules']:
+        # A rule missing any of these four keys raises KeyError, not
+        # the ValueError the shape checks above raise, so a malformed
+        # rule surfaces in main as an unexpected error. The distinction
+        # is accidental; both exit 1, only the log wording differs.
         rule_id = rule['id']
         description = rule['description']
         check = rule['check'] # Text to search for.
         severity = rule['severity']
 
+        # PASS means the check text appears, nothing more. The rules
+        # file therefore has to phrase each check as the good setting
+        # it wants to find; a rule written as the bad string to hunt
+        # for would report PASS exactly when the bad setting is
+        # present. That convention lives in the shipped sshd_rules.yaml
+        # examples, not in anything enforced here.
         found = False
         for line in system_config_data:
             # A commented out line is not a setting. Without this skip,
@@ -108,6 +123,10 @@ def audit_configuration(config, system_config_data):
             # would report PASS for a control that is not in force.
             if line.lstrip().startswith('#'):
                 continue
+            # Only whole line comments are skipped. A trailing comment
+            # after real settings that happens to contain the check
+            # text still counts as a find, which is a false PASS I
+            # know about and accept for a plain text search.
             if check in line:
                 found = True
                 break
