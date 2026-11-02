@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 300" role="img" aria-label="A bench from above: one gouge at a time crosses the lino block, and the proof sheet gains a line per cut">
+<rect x="0" y="0" width="1200" height="300" fill="#c6c4be"/>
+<rect x="0" y="0" width="1200" height="300" fill="#ffffff" opacity="0.06">
+<animate attributeName="opacity" values="0.06;0.20;0.06" dur="34s" repeatCount="indefinite"/>
+</rect>
+<rect x="760" y="26" width="330" height="66" fill="#aaa89f" stroke="#262422" stroke-width="3"/>
+<polygon points="806,36 906,42 900,80 812,74" fill="#98968f" stroke="#262422" stroke-width="3"/>
+<rect x="0" y="118" width="1200" height="182" fill="#987854"/>
+<g id="block">
+<rect x="380" y="150" width="440" height="120" fill="#aeaca4" stroke="#262422" stroke-width="3"/>
+<line x1="410" y1="182" x2="790" y2="182" stroke="#262422" stroke-width="5" opacity="0">
+<animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.30;0.36;1" dur="40s" repeatCount="indefinite"/>
+</line>
+<line x1="410" y1="216" x2="790" y2="216" stroke="#262422" stroke-width="5" opacity="0">
+<animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.62;0.68;1" dur="40s" repeatCount="indefinite"/>
+</line>
+<path d="M 430,168 A 16,10 0 1 1 462,168" fill="none" stroke="#787670" stroke-width="4" opacity="0">
+<animate attributeName="opacity" values="0;0;1;0;0" keyTimes="0;0.30;0.38;0.48;1" dur="40s" repeatCount="indefinite"/>
+<animateTransform attributeName="transform" type="translate" values="0,0; 60,-6; 90,0" keyTimes="0;0.38;0.48" dur="40s" repeatCount="indefinite"/>
+</path>
+</g>
+<g id="gouge1">
+<rect x="-70" y="-13" width="70" height="26" rx="12" fill="#d8a09e" stroke="#262422" stroke-width="3"/>
+<polygon points="0,-9 30,0 0,9" fill="#e2e2dc" stroke="#262422" stroke-width="2"/>
+<animateTransform attributeName="transform" type="translate" values="330,182; 330,182; 850,182; 850,182; 200,130; 200,130" keyTimes="0;0.10;0.34;0.44;0.52;1" dur="40s" repeatCount="indefinite"/>
+</g>
+<g id="gouge2" opacity="0">
+<rect x="-70" y="-13" width="70" height="26" rx="12" fill="#d8a09e" stroke="#262422" stroke-width="3"/>
+<path d="M 0,-10 A 12,10 0 0 1 0,10 Z" fill="#e2e2dc" stroke="#262422" stroke-width="2"/>
+<animateTransform attributeName="transform" type="translate" values="330,216; 330,216; 850,216; 850,216; 200,130; 200,130" keyTimes="0;0.46;0.66;0.76;0.84;1" dur="40s" repeatCount="indefinite"/>
+<animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.44;0.48;0.82;0.86;1" dur="40s" repeatCount="indefinite"/>
+</g>
+<g id="proof">
+<rect x="880" y="196" width="280" height="88" fill="#d2d0ca" stroke="#262422" stroke-width="2"/>
+<line x1="904" y1="226" x2="1136" y2="226" stroke="#262422" stroke-width="5" opacity="0">
+<animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.36;0.40;1" dur="40s" repeatCount="indefinite"/>
+</line>
+<line x1="904" y1="254" x2="1136" y2="254" stroke="#262422" stroke-width="5" opacity="0">
+<animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.68;0.72;1" dur="40s" repeatCount="indefinite"/>
+</line>
+</g>
+<rect x="60" y="150" width="240" height="120" fill="#b2b0a8" stroke="#262422" stroke-width="3"/>
+<g stroke="#262422" stroke-width="2"><line x1="108" y1="158" x2="108" y2="262"/><line x1="156" y1="158" x2="156" y2="262"/><line x1="204" y1="158" x2="204" y2="262"/><line x1="252" y1="158" x2="252" y2="262"/></g>
+<g fill="#d8a09e" stroke="#262422" stroke-width="2"><rect x="72" y="196" width="22" height="58"/><rect x="168" y="196" width="22" height="58"/><rect x="216" y="196" width="22" height="58"/></g>
+</svg>
