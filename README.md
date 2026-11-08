@@ -1,10 +1,10 @@
-![The bench before work: an open gouge roll with one pocket empty and one tool out on the wood](intro-banner.png)
+![Intro scenery: a brass theodolite telescope close up aligned on the flag line, the white flags blurring in a straight row beyond it and one orange flag standing out of line at the right](intro-banner.png)
 
 # analyze-configuration-auditor
 
-*The Linocut Artist's Gouge Roll: five tools in their pockets, each one named by the cut it must make.*
+![Wordmark banner: a green field at first light with a brass theodolite on its mahogany tripod at the centre, sighting along a straight row of white marker flags running to the horizon, one orange flag planted beside the line near the front](banner.png)
 
-![Wordmark banner](banner.png)
+<p align="center"><img src="logo.png" alt="analyze-configuration-auditor logo: a brass theodolite straight on atop its mahogany tripod in a green field, its telescope level and one small orange marker flag planted in the grass beside the tripod foot" width="200"></p>
 
 ![Animated themed scene](scene.svg)
 
