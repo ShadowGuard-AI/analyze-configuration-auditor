@@ -8,7 +8,6 @@
 
 ![Animated themed scene](scene.svg)
 
-# analyze-configuration-auditor
 Audits system configurations (e.g., SSH, Apache) against security best practices and flags deviations. Uses YAML/JSON configuration files for defining rules. - Focused on Data analysis and reporting
 
 ## Rules format
